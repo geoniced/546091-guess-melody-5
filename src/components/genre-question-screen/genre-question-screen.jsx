@@ -64,7 +64,7 @@ class GenreQuestionScreen extends PureComponent {
                       const value = evt.target.checked;
 
                       this.setState({
-                        answer: [...userAnswers.slice(0, i), value, ...userAnswers.slice(i + 1)],
+                        answers: [...userAnswers.slice(0, i), value, ...userAnswers.slice(i + 1)],
                       });
                     }}
                   />
