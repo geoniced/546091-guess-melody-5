@@ -1,5 +1,5 @@
 import {extend} from "../utils";
-import ActionType from "./actions";
+import {ActionType} from "./actions";
 
 const initialState = {
   mistakes: 0,
