@@ -23,12 +23,22 @@ const App = () => {
         <Route path="/login" exact>
           <AuthScreen />
         </Route>
-        <Route path="/result" exact>
-          <WinScreen />
-        </Route>
-        <Route path="/lose" exact>
-          <GameOverScreen />
-        </Route>
+        <Route exact
+          path="/result"
+          render={({history}) => (
+            <WinScreen
+              onReplayButtonClick={() => history.push(`/game`)}
+            />
+          )}
+        />
+        <Route exact
+          path="/lose"
+          render={({history}) => (
+            <GameOverScreen
+              onReplayButtonClick={() => history.push(`/game`)}
+            />
+          )}
+        />
         <Route path="/game" exact>
           <GameScreen
             errorsCount={MAX_MISTAKE_COUNT}
