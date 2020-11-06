@@ -1,5 +1,5 @@
 import {AuthorizationStatus} from "../const";
-import {loadQuestions, requireAuthorization} from "./actions";
+import {loadQuestions, redirectToRoute, requireAuthorization} from "./actions";
 
 export const fetchQuestionList = () => (dispatch, _getState, api) => (
   api.get(`/questions`)
@@ -17,4 +17,5 @@ export const checkAuth = () => (dispatch, _getState, api) => (
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(`/login`, {email, password})
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(() => dispatch(redirectToRoute(`/result`)))
 );
