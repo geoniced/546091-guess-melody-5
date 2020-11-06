@@ -7,49 +7,49 @@ import GameOverScreen from "../game-over-screen/game-over-screen";
 import GameScreen from "../game-screen/game-screen";
 import PrivateRoute from "../private-route/private-route";
 import browserHistory from "../../browser-history";
-import {MAX_MISTAKE_COUNT} from "../../const";
+import {AppRoute, MAX_MISTAKE_COUNT} from "../../const";
 
 const App = () => {
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact
-          path="/"
+          path={AppRoute.ROOT}
           render={({history}) => (
             <WelcomeScreen
-              onPlayButtonClick={() => history.push(`/game`)}
+              onPlayButtonClick={() => history.push(AppRoute.GAME)}
               errorsCount={MAX_MISTAKE_COUNT}
             />
           )}
         />
         <Route exact
-          path="/login"
+          path={AppRoute.LOGIN}
           render={({history}) => (
             <AuthScreen
-              onReplayButtonClick={() => history.push(`/game`)}
+              onReplayButtonClick={() => history.push(AppRoute.GAME)}
             />
           )}
         />
         <PrivateRoute
           exact
-          path={`/result`}
+          path={AppRoute.RESULT}
           render={({history}) => {
             return (
               <WinScreen
-                onReplayButtonClick={() => history.push(`/game`)}
+                onReplayButtonClick={() => history.push(AppRoute.GAME)}
               />
             );
           }}
         />
         <Route exact
-          path="/lose"
+          path={AppRoute.LOSE}
           render={({history}) => (
             <GameOverScreen
-              onReplayButtonClick={() => history.push(`/game`)}
+              onReplayButtonClick={() => history.push(AppRoute.GAME)}
             />
           )}
         />
-        <Route path="/game" exact>
+        <Route path={AppRoute.GAME} exact>
           <GameScreen
             errorsCount={MAX_MISTAKE_COUNT}
           />
