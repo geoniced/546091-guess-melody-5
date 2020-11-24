@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useCallback} from "react";
 import PropTypes from "prop-types";
 import genreQuestionProp from "./genre-question.prop";
 import GenreQuestionItem from "../genre-question-item/genre-question-item";
@@ -17,6 +17,11 @@ const GenreQuestionScreen = (props) => {
     answers,
     genre
   } = question;
+
+  const onGameSubmitHandler = useCallback((evt) => {
+    evt.preventDefault();
+    onAnswer();
+  }, []);
 
   return (
     <section className="game game--genre">
@@ -38,10 +43,7 @@ const GenreQuestionScreen = (props) => {
         <h2 className="game__title">Выберите {genre} треки</h2>
         <form
           className="game__tracks"
-          onSubmit={(evt) => {
-            evt.preventDefault();
-            onAnswer();
-          }}
+          onSubmit={onGameSubmitHandler}
         >
           {answers.map((answer, i) => (
             <GenreQuestionItem

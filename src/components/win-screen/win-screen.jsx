@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useCallback} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {resetGame} from "../../store/actions";
@@ -6,6 +6,11 @@ import {resetGame} from "../../store/actions";
 const WinScreen = (props) => {
   const {questionsCount, mistakesCount, onReplayButtonClick, resetGameAction} = props;
   const correctQuestionsCount = questionsCount - mistakesCount;
+
+  const playAgainButtonClickHandler = useCallback(() => {
+    resetGameAction();
+    onReplayButtonClick();
+  }, []);
 
   return (
     <section className="result">
@@ -15,10 +20,7 @@ const WinScreen = (props) => {
       <h2 className="result__title">Вы настоящий меломан!</h2>
       <p className="result__total">Вы ответили правильно на {correctQuestionsCount} вопросов и совершили {mistakesCount} ошибки</p>
       <button
-        onClick={() => {
-          resetGameAction();
-          onReplayButtonClick();
-        }}
+        onClick={playAgainButtonClickHandler}
         className="replay"
         type="button"
       >
