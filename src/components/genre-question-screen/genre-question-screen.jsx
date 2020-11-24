@@ -1,16 +1,31 @@
-import React, {useCallback} from "react";
+import React, {useCallback, useState} from "react";
 import PropTypes from "prop-types";
 import genreQuestionProp from "./genre-question.prop";
 import GenreQuestionItem from "../genre-question-item/genre-question-item";
 
+const useUserAnswer = (question, onAnswer) => {
+  const [answers, setAnswers] = useState(new Array(question.answers.length).fill(false));
+
+  const handleAnswer = () => {
+    onAnswer(question, answers);
+  };
+
+  const handleChange = (i, value) => {
+    const userAnswers = answers.slice();
+    userAnswers[i] = value;
+
+    setAnswers(userAnswers);
+  };
+
+  return [answers, handleAnswer, handleChange];
+};
+
 const GenreQuestionScreen = (props) => {
   const {
     onAnswer,
-    onChange,
     question,
     renderPlayer,
     children,
-    userAnswers,
   } = props;
 
   const {
@@ -18,9 +33,11 @@ const GenreQuestionScreen = (props) => {
     genre
   } = question;
 
+  const [userAnswers, handleAnswer, handleChange] = useUserAnswer(question, onAnswer);
+
   const onGameSubmitHandler = useCallback((evt) => {
     evt.preventDefault();
-    onAnswer();
+    handleAnswer();
   }, []);
 
   return (
@@ -50,7 +67,7 @@ const GenreQuestionScreen = (props) => {
               answer={answer}
               id={i}
               key={`${i}-${answer.src}`}
-              onChange={onChange}
+              onChange={handleChange}
               renderPlayer={renderPlayer}
               userAnswer={userAnswers[i]}
             />
@@ -65,11 +82,9 @@ const GenreQuestionScreen = (props) => {
 
 GenreQuestionScreen.propTypes = {
   onAnswer: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
   question: genreQuestionProp,
   renderPlayer: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired,
-  userAnswers: PropTypes.arrayOf(PropTypes.bool).isRequired,
 };
 
 export default GenreQuestionScreen;
