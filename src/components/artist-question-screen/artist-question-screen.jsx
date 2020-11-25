@@ -60,7 +60,6 @@ const ArtistQuestionScreen = (props) => {
 ArtistQuestionScreen.propTypes = {
   onAnswer: PropTypes.func.isRequired,
   question: artistQuestionProp,
-  renderPlayer: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired,
 };
 
