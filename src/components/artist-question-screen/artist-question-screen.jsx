@@ -1,13 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import artistQuestionProp from "./artist-question.prop";
+import useActivePlayer from "../../hooks/use-active-player/use-active-player";
 
 const ArtistQuestionScreen = (props) => {
-  const {onAnswer, question, renderPlayer, children} = props;
+  const {onAnswer, question, children} = props;
   const {
     answers,
     song,
   } = question;
+
+  const [renderPlayer] = useActivePlayer();
 
   return (
     <section className="game game--artist">

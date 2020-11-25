@@ -1,14 +1,14 @@
-import React, {useCallback} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import genreQuestionProp from "./genre-question.prop";
 import GenreQuestionItem from "../genre-question-item/genre-question-item";
 import useUserAnswer from "../../hooks/use-user-answer/use-user-answer";
+import useActivePlayer from "../../hooks/use-active-player/use-active-player";
 
 const GenreQuestionScreen = (props) => {
   const {
     onAnswer,
     question,
-    renderPlayer,
     children,
   } = props;
 
@@ -18,11 +18,12 @@ const GenreQuestionScreen = (props) => {
   } = question;
 
   const [userAnswers, handleAnswer, handleChange] = useUserAnswer(question, onAnswer);
+  const [renderPlayer] = useActivePlayer();
 
-  const onGameSubmitHandler = useCallback((evt) => {
-    evt.preventDefault();
-    handleAnswer();
-  }, []);
+  // const onGameSubmitHandler = useCallback((evt) => {
+  //   evt.preventDefault();
+  //   handleAnswer();
+  // }, []);
 
   return (
     <section className="game game--genre">
@@ -44,7 +45,10 @@ const GenreQuestionScreen = (props) => {
         <h2 className="game__title">Выберите {genre} треки</h2>
         <form
           className="game__tracks"
-          onSubmit={onGameSubmitHandler}
+          onSubmit={(evt) => {
+            evt.preventDefault();
+            handleAnswer();
+          }}
         >
           {answers.map((answer, i) => (
             <GenreQuestionItem
@@ -67,7 +71,6 @@ const GenreQuestionScreen = (props) => {
 GenreQuestionScreen.propTypes = {
   onAnswer: PropTypes.func.isRequired,
   question: genreQuestionProp,
-  renderPlayer: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired,
 };
 

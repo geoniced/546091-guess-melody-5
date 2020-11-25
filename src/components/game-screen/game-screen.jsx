@@ -10,12 +10,12 @@ import Mistakes from "../mistakes/mistakes";
 import artistQuestionProp from "../artist-question-screen/artist-question.prop";
 import genreQuestionProp from "../genre-question-screen/genre-question.prop";
 
-import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player";
+// import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player";
 // import withUserAnswer from "../../hocs/with-user-answer/with-user-answer";
 
 // const GenreQuestionScreenWrapped = withAudioPlayer(withUserAnswer(GenreQuestionScreen));
-const GenreQuestionScreenWrapped = withAudioPlayer(GenreQuestionScreen);
-const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
+// const GenreQuestionScreenWrapped = withAudioPlayer(GenreQuestionScreen);
+// const ArtistQuestionScreenWrapped = withAudioPlayer(ArtistQuestionScreen);
 
 const GameScreen = (props) => {
   const {
@@ -41,23 +41,23 @@ const GameScreen = (props) => {
   switch (question.type) {
     case GameType.ARTIST:
       return (
-        <ArtistQuestionScreenWrapped
+        <ArtistQuestionScreen
           key={step}
           question={question}
           onAnswer={onUserAnswer}
         >
           <Mistakes count={mistakes} />
-        </ArtistQuestionScreenWrapped>
+        </ArtistQuestionScreen>
       );
     case GameType.GENRE:
       return (
-        <GenreQuestionScreenWrapped
+        <GenreQuestionScreen
           key={step}
           question={question}
           onAnswer={onUserAnswer}
         >
           <Mistakes count={mistakes} />
-        </GenreQuestionScreenWrapped>
+        </GenreQuestionScreen>
       );
   }
 
