@@ -11,7 +11,7 @@ import artistQuestionProp from "../artist-question-screen/artist-question.prop";
 import genreQuestionProp from "../genre-question-screen/genre-question.prop";
 
 import withAudioPlayer from "../../hocs/with-audio-player/with-audio-player";
-import withUserAnswer from "../../hocs/with-user-answer/with-user-answer";
+// import withUserAnswer from "../../hocs/with-user-answer/with-user-answer";
 
 // const GenreQuestionScreenWrapped = withAudioPlayer(withUserAnswer(GenreQuestionScreen));
 const GenreQuestionScreenWrapped = withAudioPlayer(GenreQuestionScreen);
