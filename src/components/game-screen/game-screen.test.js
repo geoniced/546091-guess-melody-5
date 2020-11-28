@@ -55,7 +55,10 @@ describe(`GameScreen renders correctly`, () => {
           />,
           {
             createNodeMock: () => {
-              return {};
+              return {
+                play() {},
+                pause() {},
+              };
             }
           }
       )
@@ -77,7 +80,10 @@ describe(`GameScreen renders correctly`, () => {
           />,
           {
             createNodeMock: () => {
-              return {};
+              return {
+                play() {},
+                pause() {},
+              };
             }
           }
       )

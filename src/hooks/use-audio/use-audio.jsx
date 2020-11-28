@@ -6,20 +6,24 @@ const useAudio = (isPlaying, src) => {
 
   useEffect(() => {
     const audio = audioRef.current;
-    audio.src = src;
-
-    audio.oncanplaythrough = () => setIsLoading(false);
 
     if (isPlaying) {
       audio.play();
     } else {
       audio.pause();
     }
+  }, [isPlaying]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    audio.src = src;
+
+    audio.oncanplaythrough = () => setIsLoading(false);
 
     return () => {
       audio.oncanplaythrough = null;
     };
-  });
+  }, []);
 
   return [isLoading, audioRef];
 };

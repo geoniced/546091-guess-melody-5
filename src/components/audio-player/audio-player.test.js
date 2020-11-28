@@ -11,6 +11,7 @@ it(`AudioPlayer renders correctly`, () => {
           isPlaying={false}
           isLoading={true}
           onPlayButtonClick={noop}
+          src={``}
         >
           <audio />
         </AudioPlayer>,
